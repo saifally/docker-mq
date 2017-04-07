@@ -27,3 +27,11 @@ goagent-3:
     - goserver
   environment:
     AGENT_KEY: '123456789abcdef'
+
+goagent-4:
+  build: gocd-agent
+  hostname: go-agent-4
+  links:
+    - goserver
+  environment:
+    AGENT_KEY: '123456789abcdef'

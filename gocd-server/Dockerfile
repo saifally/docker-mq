@@ -28,6 +28,10 @@ RUN set -x \
 
 COPY set-agent-key.sh /
 
+COPY plugin/ /usr/share/go-server/plugins/external/
+
+RUN chmod 777 /usr/share/go-server/server.sh
+
 VOLUME /var/lib/go-server /etc/go /var/go
 
 # Start script requires JAVA_HOME to be specified
