@@ -17,15 +17,20 @@ RUN set -x \
  # Uses default environment values from start script
  && rm /etc/default/go-agent
 
+ RUN echo "deb http://ppa.launchpad.net/git-core/ppa/ubuntu xenial main" > /etc/apt/sources.list.d/git.list && \
+  apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys E1DF1F24 && \
+  apt-get update && \
+  apt-get install -y git
+
 COPY start-agent.sh /
 
 ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre \
 
-    # Agent will look for server at this hostname
-    GO_SERVER=go-server \
+# Agent will look for server at this hostname
+GO_SERVER=go-server \
 
-    # Need to set this otherwise work dir will be /usr/share/go-agent
-    # and auto register won't work
-    AGENT_WORK_DIR=/var/lib/go-agent
+# Need to set this otherwise work dir will be /usr/share/go-agent
+# and auto register won't work
+AGENT_WORK_DIR=/var/lib/go-agent
 
 CMD ["/start-agent.sh"]

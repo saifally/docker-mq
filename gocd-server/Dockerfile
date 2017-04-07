@@ -20,6 +20,12 @@ RUN set -x \
  # Uses default environment values from start script
  && rm /etc/default/go-server
 
+ RUN echo "deb http://ppa.launchpad.net/git-core/ppa/ubuntu xenial main" > /etc/apt/sources.list.d/git.list && \
+  apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys E1DF1F24 && \
+  apt-get update && \
+  apt-get install -y git
+
+
 COPY set-agent-key.sh /
 
 VOLUME /var/lib/go-server /etc/go /var/go

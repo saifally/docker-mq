@@ -4,8 +4,25 @@ goserver:
   ports:
     - '8153:8153'
 
-goagent:
+goagent-1:
   build: gocd-agent
+  hostname: go-agent-1
+  links:
+    - goserver
+  environment:
+    AGENT_KEY: '123456789abcdef'
+
+goagent-2:
+  build: gocd-agent
+  hostname: go-agent-2
+  links:
+    - goserver
+  environment:
+    AGENT_KEY: '123456789abcdef'
+
+goagent-3:
+  build: gocd-agent
+  hostname: go-agent-3
   links:
     - goserver
   environment:
