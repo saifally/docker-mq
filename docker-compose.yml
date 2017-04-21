@@ -1,37 +1,11 @@
-goserver:
-  build: gocd-server
-  hostname: go-server
+mq:
+  build: mq
+  hostname: mq
+  environment:
+    - LICENSE=accept
+    - MQ_QMGR_NAME=QM2
+  volumes:
+    - mqdata:/mnt/mqm
   ports:
-    - '8153:8153'
-
-goagent-1:
-  build: gocd-agent
-  hostname: go-agent-1
-  links:
-    - goserver
-  environment:
-    AGENT_KEY: '123456789abcdef'
-
-goagent-2:
-  build: gocd-agent
-  hostname: go-agent-2
-  links:
-    - goserver
-  environment:
-    AGENT_KEY: '123456789abcdef'
-
-goagent-3:
-  build: gocd-agent
-  hostname: go-agent-3
-  links:
-    - goserver
-  environment:
-    AGENT_KEY: '123456789abcdef'
-
-goagent-4:
-  build: gocd-agent
-  hostname: go-agent-4
-  links:
-    - goserver
-  environment:
-    AGENT_KEY: '123456789abcdef'
+    - '9443:9443'
+    - '1411:1411'
